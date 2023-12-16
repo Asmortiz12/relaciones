@@ -1,19 +1,28 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateAutorDto } from './create-autor.dto';
-import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsDateString, IsOptional, IsString, MaxLength } from "class-validator";
 
-export class UpdateAutorDto extends PartialType(CreateAutorDto) {
+export class UpdateAutorDto {
     @IsOptional()
     @IsString({ message: 'El nombre debe ser una cadena de texto' })
-    @MaxLength(50, { message: 'El nombre no puede tener más de 50 caracteres' })
+    @MaxLength(100, { message: 'El nombre no puede tener más de 100 caracteres' })
     Nombre?: string;
-  
+
     @IsOptional()
-    @IsString({ message: 'La fecha de publicación debe ser una fecha válida' })
+    @IsDateString()
     fechaNacimiento?: string;
 
-    @IsString({each:true})
+    @IsOptional()
+    @IsString({ message: 'La nacionalidad debe ser una cadena de texto' })
+    @MaxLength(100, { message: 'La nacionalidad no puede tener más de 100 caracteres' })
+    nacionalidad?: string;
+
+    @IsOptional()
+    @IsString({ message: 'El género literario debe ser una cadena de texto' })
+    @MaxLength(100, { message: 'El género literario no puede tener más de 100 caracteres' })
+    generoLiterario?: string;
+
+    @IsString({ each: true })
     @IsArray()
     @IsOptional()
     listaBooks?: string[];
+    
 }

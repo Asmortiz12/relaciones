@@ -67,7 +67,7 @@ export class AutorService {
     const autor = await this.autorRepository.preload({
       id: id,
       ...updateAutorDto,
-      listaBooks:[]
+      listaBooks: updateAutorDto.listaBooks.map((titulo) => ({ titulo })),
     });
 
     if (!autor) {

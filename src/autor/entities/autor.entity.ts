@@ -3,7 +3,7 @@ import { Book } from "./book.entity";
 
 @Entity()
 export class Autor {
-    @PrimaryGeneratedColumn('identity')
+  @PrimaryGeneratedColumn('identity')
   id: number;
 
   @Column('varchar')
@@ -12,18 +12,21 @@ export class Autor {
   @Column('varchar')
   fechaNacimiento: string;
 
-@OneToMany(
-  ()=>Book,
-  (books)=>books.autor,
-  {
-    cascade:true,
-    eager:true
-  }
+  @Column('varchar', { nullable: true })
+  nacionalidad: string;
 
-)
+  @Column('varchar', { nullable: true })
+  generoLiterario: string;
 
-  listaBooks?:Book[]
+  // Agrega más campos según sea necesario
 
-
-
+  @OneToMany(
+    () => Book,
+    (book) => book.autor,
+    {
+      cascade: true,
+      eager: true,
+    }
+  )
+  listaBooks?: Book[];
 }
